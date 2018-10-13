@@ -1,0 +1,6 @@
+[Scenario]
+Name=Comprehensive test
+Description=Test all features, and if it passes, program the SPINOR firmware
+Tests=tomu-load-toboot,tomu-wait-for-dfu,tomu-load-tester,tomu-wait-for-banner
+WorkingDirectory=bin
+Timeout=60

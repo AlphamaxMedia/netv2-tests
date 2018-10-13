@@ -1,0 +1,3 @@
+[submodule "bin/netv2-fpga"]
+	path = bin/netv2-fpga
+	url = https://github.com/AlphamaxMedia/netv2-fpga
