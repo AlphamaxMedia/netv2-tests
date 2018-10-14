@@ -4,3 +4,6 @@
 [submodule "bin/netv2-fpga-userimage"]
 	path = bin/netv2-fpga-userimage
 	url = https://github.com/AlphamaxMedia/netv2-fpga
+[submodule "bin/netv2mvp-scripts"]
+	path = bin/netv2mvp-scripts
+	url = https://github.com/AlphamaxMedia/netv2mvp-scripts.git
