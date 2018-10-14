@@ -1,0 +1,6 @@
+[Interface]
+Name=Front panel LEDs
+Description=Shows test status on the LEDs
+Format=text
+WorkingDirectory=bin
+ExecStart=/home/pi/code/netv2-tests/bin/led-interface.sh

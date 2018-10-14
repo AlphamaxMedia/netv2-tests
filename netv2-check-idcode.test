@@ -1,0 +1,6 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/getidcode.sh
+Name=IDCODE check
+Description=Check the IDCODE of the FPGA
+Timeout=4
+Type=simple
