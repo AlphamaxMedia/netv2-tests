@@ -1,0 +1,6 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/setup_maintest.sh
+Name=Main test setup
+Description=Setup system to run the main set of tests
+Timeout=40
+Type=simple
