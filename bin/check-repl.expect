@@ -16,9 +16,12 @@ expect {
 	}
 	set tpid [exp_pid -i $spawn_id]
 	exec kill -9 $tpid
-	failed "Tester REPL prompt"
+	puts "Failure: Tester REPL prompt"
+	exit 1
     }
 }
 # kill the flterm so it doesn't hang around and muck with the next process
 set tpid [exp_pid -i $spawn_id]
 exec kill -9 $tpid
+
+exit 0
