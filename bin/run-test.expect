@@ -1,0 +1,27 @@
+#!/usr/bin/expect
+
+set timeout 120
+spawn /home/pi/code/netv2-tests/bin/flterm/flterm --port /dev/ttyAMA0 --speed 115200
+
+send "debug tester\n\r"
+expect {
+    "expect_pass" {
+	puts "Main test body passed"
+
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	exit 0
+    } "expect_fail" {
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	failed "Main test body had errors, check log"
+    }
+    timeout {
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	failed "Tester timeout!"
+    }
+}
+
+set tpid [exp_pid -i $spawn_id]
+exec kill -9 $tpid

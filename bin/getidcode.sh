@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -x
 
 rm -f /tmp/devicetype.txt
 

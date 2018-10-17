@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+
+set timeout 1
+spawn /home/pi/code/netv2-tests/bin/flterm/flterm --port /dev/ttyAMA0 --speed 115200
+
+set try 0
+expect {
+    "TESTER_NX8D" {
+	send "\n\r"
+    }
+    timeout {
+	if {$try < 10} {
+	    send "\n\r"
+	    incr try
+	    exp_continue
+	}
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	failed "Tester REPL prompt"
+    }
+}
+# kill the flterm so it doesn't hang around and muck with the next process
+set tpid [exp_pid -i $spawn_id]
+exec kill -9 $tpid
