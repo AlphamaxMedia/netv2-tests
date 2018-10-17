@@ -7,3 +7,6 @@
 [submodule "bin/netv2mvp-scripts"]
 	path = bin/netv2mvp-scripts
 	url = https://github.com/AlphamaxMedia/netv2mvp-scripts.git
+[submodule "bin/flterm"]
+	path = bin/flterm
+	url = https://github.com/timvideos/flterm.git
