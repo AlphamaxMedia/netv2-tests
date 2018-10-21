@@ -2,5 +2,6 @@
 ExecStart=/home/pi/code/netv2-tests/bin/run-test.expect
 Name=Main test
 Description=Runs the main self-test routine and report results back to the UI
-Timeout=120
+Timeout=90
+Requires=netv2-setup-maintest,netv2-check-repl
 Type=simple

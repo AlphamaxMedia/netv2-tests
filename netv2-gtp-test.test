@@ -1,0 +1,7 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/run-test.expect
+Name=Main test
+Description=Runs the GTP self-test routine and report results back to the UI
+Timeout=30
+Requires=netv2-setup-gtptest,netv2-check-repl
+Type=simple

@@ -10,11 +10,11 @@ DEVICE=`cat /tmp/devicetype.txt`
 
 if [ "$DEVICE" = "35T" ]
 then
-    TESTIMAGE="tester-35.bit"
+    TESTIMAGE="gtptester-35.bit"
     BSCANIMAGE="bscan_spi_xc7a35t.bit"
 elif [ "$DEVICE" = "100T" ]
 then
-    TESTIMAGE="tester-100.bit"
+    TESTIMAGE="gtptester-100.bit"
     BSCANIMAGE="bscan_spi_xc7a100t.bit"
 else
     echo "Device type not valid, aborting!"
@@ -30,7 +30,7 @@ rm -f /tmp/firmware.bin
 # cause the CRC computation to fail. So this forces a padding on firmware.bin
 # which guarantees a deterministic fill for the entire firmware length and
 # thus allow CRC to succeed
-cp /home/pi/code/netv2-tests/bin/netv2-fpga/tester-images/tester-firmware.bin /tmp/firmware.bin
+cp /home/pi/code/netv2-tests/bin/netv2-fpga/tester-images/gtptester-firmware.bin /tmp/firmware.bin
 dd if=/dev/zero of=/tmp/firmware.bin bs=1 count=1 seek=131071
 
 /home/pi/code/netv2-tests/bin/netv2-fpga/bin/mknetv2img -f --output /tmp/firmware.upl /tmp/firmware.bin
@@ -49,6 +49,6 @@ sudo /opt/openocd/bin/openocd \
      -f /home/pi/code/netv2-tests/bin/netv2mvp-scripts/cl-fpga.cfg
 
 sleep 3 # give a moment for the bios to boot, so flterm doesn't catch it by accident
-echo "Main test firmware loaded..."
+echo "GTP test firmware loaded..."
 
 exit 0

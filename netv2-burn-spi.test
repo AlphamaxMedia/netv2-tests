@@ -1,0 +1,7 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/burn-spi.sh
+Name=Main test
+Description=Burn the final FPGA image onto the SPI ROM
+Timeout=90
+Requires=netv2-main-test,netv2-gtp-test
+Type=simple
