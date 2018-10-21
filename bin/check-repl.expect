@@ -6,7 +6,21 @@ spawn /home/pi/code/netv2-tests/bin/flterm/flterm --port /dev/ttyAMA0 --speed 11
 set try 0
 expect {
     "TESTER_NX8D" {
-	send "\n\r"
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	exit 0
+    }
+    "BIOS>" {
+	puts " "
+	puts " "
+	# output a dummy line to clear line corruption from bad/problematic firmware
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":4, \"subtest\":\"RAM\", \"msg\": \[\{\"Failed to load firmware, check DDR path!\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"end_time\":0, \"test_errcount\":1 }"
+	puts "Failure: Firmware did not load, check for RAM errors"
+	
+	set tpid [exp_pid -i $spawn_id]
+	exec kill -9 $tpid
+	exit 1
     }
     timeout {
 	if {$try < 10} {
@@ -23,5 +37,3 @@ expect {
 # kill the flterm so it doesn't hang around and muck with the next process
 set tpid [exp_pid -i $spawn_id]
 exec kill -9 $tpid
-
-exit 0

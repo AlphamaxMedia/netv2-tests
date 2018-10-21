@@ -1,6 +1,6 @@
 [Scenario]
 Name=Comprehensive test
 Description=Test all features, and if it passes, program the SPINOR firmware
-Tests=netv2-check-idcode,netv2-setup-maintest,netv2-check-repl,netv2-main-test,netv2-setup-gtptest,netv2-check-repl,netv2-gtp-test,netv2-burn-spi
+Tests=netv2-check-idcode,netv2-setup-maintest,netv2-check-repl,netv2-main-test,netv2-setup-gtptest,netv2-check-repl2,netv2-gtp-test,netv2-burn-spi
 WorkingDirectory=bin
 Timeout=60
