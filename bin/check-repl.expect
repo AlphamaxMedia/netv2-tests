@@ -14,7 +14,8 @@ expect {
 	puts " "
 	puts " "
 	# output a dummy line to clear line corruption from bad/problematic firmware
-	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":4, \"subtest\":\"RAM\", \"msg\": \[\{\"Failed to load firmware, check DDR path!\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"RAM\", \"msg\": \[\{\"Failed to load firmware, check DDR path!\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"RAM\", \"msg\": \[\{\"errcnt\":1\}\] }"
 	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"end_time\":0, \"test_errcount\":1 }"
 	puts "Failure: Firmware did not load, check for RAM errors"
 	

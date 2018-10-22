@@ -1,0 +1,7 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/pingtest.expect
+Name=Network ping test
+Description=Checks that network interface is reachable
+Timeout=20
+Requires=netv2-setup-maintest,netv2-check-repl
+Type=simple

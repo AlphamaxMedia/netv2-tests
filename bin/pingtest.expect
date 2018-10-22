@@ -1,0 +1,27 @@
+#!/usr/bin/expect
+
+set timeout 10
+spawn ping -i 0.2 -c 10 -W 1 10.0.11.2
+
+expect {
+    " 0% packet loss" {
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"Pingtest passed\":0\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"errcnt\":0\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"end_time\":-1, \"test_errcount\":0 }"
+	puts "Success: 10 packets received"
+	exit 0
+    } " 100% packet loss" {
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"Pingtest failed\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"errcnt\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"end_time\":-1, \"test_errcount\":1 }"
+	puts "Failure: no packets received"
+	exit 1
+    }
+    timeout {
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"Pingtest failed\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"time\":-1, \"subtest\":\"Ethernet\", \"msg\": \[\{\"errcnt\":1\}\] }"
+	puts "{\"model\":\"NeTV2MVP\", \"rev\":\"PVT1C\", \"tester_rev\":\"1\", \"dna\":\"-1\", \"end_time\":-1, \"test_errcount\":1 }"
+	puts "Failure: timeout"
+	exit 1
+    }
+}
