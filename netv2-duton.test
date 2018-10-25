@@ -1,0 +1,6 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/dut-on.sh
+Name=Power on the DUT
+Description=Apply power to the DUT
+Timeout=2
+Type=simple

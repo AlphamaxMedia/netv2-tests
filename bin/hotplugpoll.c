@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <poll.h>
+
+#define GPIO 25
+
+static int write_file(const char *filename, const char *string) {
+	int fd = open(filename, O_WRONLY);
+	if (fd == -1)
+		return fd;
+
+	write(fd, string, strlen(string));
+	close(fd);
+	return 0;
+}
+
+static int export_gpio(int gpio) {
+	char filename[512];
+	char string[128];
+
+	snprintf(filename, sizeof(filename)-1, "/sys/class/gpio/export");
+	snprintf(string, sizeof(string)-1, "%d", gpio);
+	if (write_file(filename, string))
+		return -1;
+
+	snprintf(filename, sizeof(filename)-1, "/sys/class/gpio/gpio%d/direction", gpio);
+	snprintf(string, sizeof(string)-1, "in");
+	if (write_file(filename, string))
+		return -1;
+
+	snprintf(filename, sizeof(filename)-1, "/sys/class/gpio/gpio%d/edge", gpio);
+	snprintf(string, sizeof(string)-1, "rising");
+	if (write_file(filename, string))
+		return -1;
+
+	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+   char str[256];
+   struct pollfd pfd;
+   int fd, gpio;
+   char buf[8];
+
+   /*
+      Prior calls assumed.
+      sudo sh -c "echo 4      >/sys/class/gpio/export"
+      sudo sh -c "echo in     >/sys/class/gpio/gpio4/direction"
+      sudo sh -c "echo rising >/sys/class/gpio/gpio4/edge"
+   */
+
+   if (argc > 1)
+	   gpio = atoi(argv[1]);
+   else
+	   gpio = GPIO;
+
+   /* Quick hack to enable pullup */
+   {
+	   char tmp[256];
+	   snprintf(tmp, sizeof(tmp)-1, "gpio -g mode %d up", gpio);
+	   system(tmp);
+   }
+
+   if (export_gpio(gpio)) {
+	   perror("Unable to export GPIO");
+	   return 1;
+   }
+
+   snprintf(str, sizeof(str)-1, "/sys/class/gpio/gpio%d/value", gpio);
+
+   if ((fd = open(str, O_RDONLY)) < 0)
+   {
+      fprintf(stderr, "Failed, gpio %d not exported.\n", gpio);
+      exit(1);
+   }
+
+   pfd.fd = fd;
+
+   pfd.events = POLLPRI;
+
+   lseek(fd, 0, SEEK_SET);    /* consume any prior interrupt */
+   read(fd, buf, sizeof buf);
+
+   while (1) {
+     poll(&pfd, 1, -1);         /* wait for interrupt */
+  
+     lseek(fd, 0, SEEK_SET);    /* consume interrupt */
+     read(fd, buf, sizeof buf);
+     //fprintf(stderr, "Delay...");
+     sleep(3); // three-second delay from card insert to start test -- can take a while to plug the card in
+
+     /* Read value after brief debounce */
+     lseek(fd, 0, SEEK_SET);
+     //fprintf(stderr, "Re-read...");
+     read(fd, buf, sizeof buf);
+     if (buf[0] == '0' ) {
+       continue;
+     }
+     printf("START\n");
+     fflush(stdout);
+     usleep(1000);
+   }
+
+   exit(0);
+}

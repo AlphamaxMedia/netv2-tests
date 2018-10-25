@@ -1,0 +1,6 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/testhat-drivers/tester-driver -q
+Name=Check voltages
+Description=Make sure voltage and current draw is sane
+Timeout=2
+Type=simple
