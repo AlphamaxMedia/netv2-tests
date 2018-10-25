@@ -1,6 +1,6 @@
 [Test]
 ExecStart=/home/pi/code/netv2-tests/bin/test_done.sh
-Name=Play notification sound
-Description=Play test complete sound (both pass and fail)
+Name=Notify operator, reset test
+Description=Play test complete sound (both pass and fail), reset tester
 Timeout=15
 Type=simple

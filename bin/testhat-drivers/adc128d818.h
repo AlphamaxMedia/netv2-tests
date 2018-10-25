@@ -19,6 +19,7 @@ void default_adc128d818();
 #define ADC128_REG_ALARM		0x01
 #define ADC128_REG_MASK			0x03
 #define ADC128_REG_CONV_RATE		0x07
+#define ADC128_REG_DISABLE		0x08
 #define ADC128_REG_ONESHOT		0x09
 #define ADC128_REG_SHUTDOWN		0x0a
 #define ADC128_REG_CONFIG_ADV		0x0b
