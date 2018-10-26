@@ -13,7 +13,7 @@ if [ "$IDCODE" = "0x0362d093" ]
 then
     echo "Device type is 35T"
     echo "35T" > /tmp/devicetype.txt
-elif [ "$IDCODE" = "0x03631093" ]
+elif [ "$IDCODE" = "0x13631093" ]
 then
     echo "Device type is 100T"
     echo "100T" > /tmp/devicetype.txt
