@@ -2,6 +2,6 @@
 ExecStart=/home/pi/code/netv2-tests/bin/getidcode.sh
 Name=IDCODE check
 Description=Check the IDCODE of the FPGA
-Requires=netv2-check-voltage
+Requires=netv2-check-all-voltage
 Timeout=4
 Type=simple

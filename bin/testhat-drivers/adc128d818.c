@@ -277,6 +277,8 @@ void default_adc128d818() {
   do {
     adc128d818_read_reg( ADC128_I2C_ADR_1, ADC128_REG_BUSY_STATUS, &data );
   } while( data & 0x2 );
+
+  usleep(250000);  // for some reason we still have to wait even though busy status is clear...
 }
 
 static void help(void) __attribute__ ((noreturn));
@@ -417,7 +419,6 @@ int main(int argc, char *argv[]) {
   }
 
   default_adc128d818();
-  usleep(100000);
 
   if( test_v ) {
     adc128d818_read_conv( ADC128_P12p0V, &conv );
@@ -440,7 +441,7 @@ int main(int argc, char *argv[]) {
   }
 
   if( test_q ) {
-    printf( "{ \"dna\":-1, \"subtest\":\"voltage\", \"msg\":[{" );
+    printf( "{ \"dna\":-1, \"subtest\":\"power\", \"msg\":[{" );
     
     printf( "\"12.0V\":" );
     adc128d818_read_conv( ADC128_P12p0V, &conv );
@@ -453,7 +454,7 @@ int main(int argc, char *argv[]) {
     printf( "}] }\n" );
 
     errcnt = quick_check();
-    printf( "{ \"dna\":-1, \"subtest\":\"voltage\", \"msg\":[{\"errcnt\":%d}]}\n", errcnt );
+    printf( "{ \"dna\":-1, \"subtest\":\"power\", \"msg\":[{\"errcnt\":%d}]}\n", errcnt );
     return errcnt;
   }
   

@@ -1,0 +1,8 @@
+[Scenario]
+ExecStopSucess=/home/pi/code/netv2-tests/bin/test_done.sh
+ExecStopFail=/home/pi/code/netv2-tests/bin/test_done.sh
+Name=Quick test
+Description=Test voltages and RAM only
+Tests=netv2-duton,netv2-check-all-voltage,netv2-quick-idcode,netv2-quick-setupfpga,netv2-quick-repl,netv2-quicktest
+WorkingDirectory=bin
+Timeout=60
