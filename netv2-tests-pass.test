@@ -1,0 +1,7 @@
+[Test]
+ExecStart=/home/pi/code/netv2-tests/bin/test_done.sh
+Name=Tests done
+Description=Play a test finished sound
+Timeout=5
+Requires=netv2-main-test,netv2-gtp-test,netv2-ping-test,netv2-check-voltage,netv2-burn-spi
+Type=simple
