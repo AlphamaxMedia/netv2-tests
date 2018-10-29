@@ -1,5 +1,5 @@
 [Scenario]
-ExecStopSucess=/home/pi/code/netv2-tests/bin/test_done.sh
+ExecStopSuccess=/home/pi/code/netv2-tests/bin/test_done.sh
 ExecStopFail=/home/pi/code/netv2-tests/bin/test_done.sh
 Name=Comprehensive test
 Description=Test all features, and if it passes, program the SPINOR firmware
