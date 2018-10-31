@@ -3,4 +3,4 @@ Name=NeTV2 Jig
 Description=NeTV2 Factory Test Jig
 TestFile=/boot/netv2-jig
 DefaultWorkingDirectory=bin
-DefaultScenario=full-sequence
+DefaultScenario=quick-sequence
