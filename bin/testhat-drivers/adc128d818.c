@@ -307,8 +307,8 @@ int out_of_tolerance(double value, double nominal, double tolerance) {
   }
   
 }
-#define DEFAULT_TOLERANCE 0.05  // 5% tolerance on all internal supplies
-#define ADAPTER_TOLERANCE 0.1  // allow 10% tolerance on power adapter
+#define DEFAULT_TOLERANCE 0.045  // 4.5% tolerance on all internal supplies -- 0.5% slop due to test jig itself for total 5% guaranteed range
+#define ADAPTER_TOLERANCE 0.1  // allow 10% tolerance on power adapter, this supply is expected to be messy
 
 int comprehensive_check() {
   double value;
@@ -516,15 +516,15 @@ int main(int argc, char *argv[]) {
 
   while(1) {
     adc128d818_read_conv( ADC128_P12p0V, &conv );
-    printf( "+12.0V reading: %2.4gV\n", ((double)conv) * 0.000625 / 0.0909 );
+    printf( "+12.0V reading: %2.4gV code %d\n", ((double)conv) * 0.000625 / 0.0909, conv );
 
     // constant is computed by RL * RS * 200e-6A/V
     // at 16.2k RL, 0.47ohm RS. Gives ~1mA at 1 LSB, with about 3.9A full scale
     // at 10.0k RL, we get 0.9400 as the constant, 0.6mA @ 1LSB, with 2.4A full scale
     // at 0.1ohm RS, 100k RL gives 2.0V at 1A, with 1.28A full scale
     adc128d818_read_conv( ADC128_I12p0A, &conv );
-    printf( "12V in-line current reading: %1.4gA\n", (((double)conv) * 0.000625) * 0.5 );
-    sleep(1);
+    printf( "12V in-line current reading: %1.4gA, code %d\n", (((double)conv) * 0.000625) * 0.5, conv );
+    usleep(500000);
   }
   return 0;
   
