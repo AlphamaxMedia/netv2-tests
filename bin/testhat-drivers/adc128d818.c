@@ -308,6 +308,7 @@ int out_of_tolerance(double value, double nominal, double tolerance) {
   
 }
 #define DEFAULT_TOLERANCE 0.045  // 4.5% tolerance on all internal supplies -- 0.5% slop due to test jig itself for total 5% guaranteed range
+#define ETH_TOLERANCE 0.065  // 7% tolerance on 1.2VE, the LDO is sloppy
 #define ADAPTER_TOLERANCE 0.1  // allow 10% tolerance on power adapter, this supply is expected to be messy
 
 int comprehensive_check() {
@@ -321,7 +322,7 @@ int comprehensive_check() {
   
   adc128d818_read_conv( ADC128_P1p2VE, &conv );
   value = (((double)conv) * 0.000625);
-  ret += out_of_tolerance( value, 1.2, DEFAULT_TOLERANCE );
+  ret += out_of_tolerance( value, 1.2, ETH_TOLERANCE );
   
   adc128d818_read_conv( ADC128_P1p8V, &conv );
   value = (((double)conv) * 0.000625);
