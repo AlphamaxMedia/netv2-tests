@@ -2,6 +2,6 @@
 ExecStart=/home/pi/code/netv2-tests/bin/ram-test.expect
 Name=Quick FPGA/memory test
 Description=Runs the quick self-test routine and report results back to the UI
-Timeout=20
+Timeout=30
 Requires=netv2-quick-setupfpga,netv2-quick-repl
 Type=simple
