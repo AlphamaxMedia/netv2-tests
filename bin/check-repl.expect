@@ -24,7 +24,7 @@ expect {
 	exit 1
     }
     timeout {
-	if {$try < 20} {
+	if {$try < 30} {
 	    send "\n\r"
 	    incr try
 	    exp_continue

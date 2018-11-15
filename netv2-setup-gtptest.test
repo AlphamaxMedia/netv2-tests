@@ -2,6 +2,6 @@
 ExecStart=/home/pi/code/netv2-tests/bin/setup_gtptest.sh
 Name=GTP test setup
 Description=Setup system to run the GTP test
-Timeout=30
+Timeout=40
 Requires=netv2-check-idcode
 Type=simple
