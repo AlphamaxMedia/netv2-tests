@@ -5,4 +5,4 @@ Name=Quick test
 Description=Test voltages and RAM only
 Tests=netv2-duton,netv2-check-all-voltage,netv2-quick-idcode,netv2-quick-setupfpga,netv2-quick-repl,netv2-quicktest
 WorkingDirectory=bin
-Timeout=60
+Timeout=40

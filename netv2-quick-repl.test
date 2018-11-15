@@ -2,6 +2,6 @@
 ExecStart=/home/pi/code/netv2-tests/bin/check-repl.expect
 Name=Check REPL
 Description=Checks that firmware is loaded via REPL shell command prompt response
-Timeout=20
+Timeout=25
 Requires=netv2-quick-idcode,netv2-quick-setupfpga
 Type=simple
